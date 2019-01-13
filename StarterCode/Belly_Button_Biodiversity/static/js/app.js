@@ -1,30 +1,65 @@
 function buildMetadata(sample) {
   
   // @TODO: Complete the following function that builds the metadata panel
-  var metadataURL = "/metadata/" + sample;
-  // Use `d3.json` to fetch the metadata for a sample
-  d3.json(metadataURL).then((sampleDict) => {
-    // Use d3 to select the panel with id of `#sample-metadata`
-    d3.select("#sample-metadata").html("");
-    var meta = d3.select("#sample-metadata");
+  var URL = "/metadata/" + sample;
+  // console.log(URL);
+// use d3 to fetch the metadata for a sample
+  d3.json(URL).then((data) =>{
+    var panel = d3.select("#sample-metadata");
     // Use `.html("") to clear any existing metadata
-    meta.html = "";
-    // Use `Object.entries` to add each key and value pair to the panel
-    // Hint: Inside the loop, you will need to use d3 to append new
-    // tags for each key-value in the metadata.
-    Object.entries(sampleDict).forEach(([key, value]) => {
-      meta.append("p"). text(key+": "+value);     
+    panel.html("");
+
+    Object.entries(data).forEach(([key, value]) => {
+      var paragraph = panel.append("p");
+      paragraph.text(`${key} : ${value}`);
     });
-    meta.style("font-size","12px")
-        .style("font-weight","bold");
   });
+
 }
+
+
+
+
 
 function buildCharts(sample) {
 
   // @TODO: Use `d3.json` to fetch the sample data for the plots
-
+    var pieChart = d3.select("#pie")
+    var bubbleChart = d3.select("#bubble")
+    var url = "/samples/" + sample;
     // @TODO: Build a Bubble Chart using the sample data
+    d3.json(url).then(function(data) {
+      var sValues = data.sample_values;
+      var sLabels = data.otu_ids;
+      var sText = data.otu_labels;
+
+      var trace1 = {
+        x: sLabels,
+        y: sValues,
+        mode: 'markers',
+        text: sText,
+        marker: {
+          color: sLabels,
+          size: sValues
+        },
+        type: 'scatter'
+      };
+
+      var bubbledata = [trace1];
+      var layout = {
+        xaxis: { title: "OTU ID"},
+      };
+
+    Plotly.newPlot("bubble", bubbledata, layout);
+
+
+
+
+      
+
+    // });
+
+
 
     // @TODO: Build a Pie Chart
     // HINT: You will need to use slice() to grab the top 10 sample_values,
