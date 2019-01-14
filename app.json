@@ -1,0 +1,16 @@
+{
+  "addons": [
+
+  ],
+  "buildpacks": [
+
+  ],
+  "env": {
+  },
+  "formation": {
+  },
+  "name": "Belly-Button-Biodiversity",
+  "scripts": {
+  },
+  "stack": "heroku-18"
+}
