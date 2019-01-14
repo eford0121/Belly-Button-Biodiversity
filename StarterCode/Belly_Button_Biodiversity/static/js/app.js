@@ -18,10 +18,6 @@ function buildMetadata(sample) {
 
 }
 
-
-
-
-
 function buildCharts(sample) {
 
   // @TODO: Use `d3.json` to fetch the sample data for the plots
@@ -77,20 +73,7 @@ function buildCharts(sample) {
 
     });
 
-  
-
 }
-
-
-
-
-
-
-
-    // @TODO: Build a Pie Chart
-    // HINT: You will need to use slice() to grab the top 10 sample_values,
-    // otu_ids, and labels (10 each).
-
 
 function init() {
   // Grab a reference to the dropdown select element
